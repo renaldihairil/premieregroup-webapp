@@ -1,0 +1,523 @@
+/* ============================================================
+   PREMIERE GROUP — User App (mobile) layout
+   ============================================================ */
+
+.pg-user {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background: #0F3A48; /* frame gutter on wide screens */
+}
+
+.pg-user__frame {
+  width: 100%;
+  max-width: var(--pg-user-max-w);
+  background: var(--pg-bg);
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0,0,0,.25);
+}
+
+/* ---------- Screen scroll area ---------- */
+.pg-user__scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--pg-user-bottomnav-h) + var(--pg-s-6));
+}
+
+/* ---------- Header ---------- */
+.pg-uheader {
+  background: linear-gradient(135deg, var(--pg-blue) 0%, var(--pg-blue-700) 100%);
+  color: #fff;
+  padding: var(--pg-s-6) var(--pg-s-5) var(--pg-s-6);
+}
+.pg-uheader--tight { padding-bottom: var(--pg-s-5); }
+.pg-uheader--home { padding-bottom: 68px; }
+.pg-uheader__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pg-s-3);
+}
+.pg-uheader__brand { display: flex; align-items: center; gap: 10px; }
+.pg-uheader__logo {
+  width: 32px; height: 32px; flex: none;
+  border-radius: 8px; background: #fff; padding: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .18);
+}
+.pg-uheader__brandtext { font-weight: 800; letter-spacing: .04em; font-size: 16px; line-height: 1.1; white-space: nowrap; }
+.pg-uheader__title { font-size: var(--pg-fs-lg); font-weight: 700; }
+.pg-uheader__greeting { margin-top: var(--pg-s-4); }
+.pg-uheader__hello { font-size: var(--pg-fs-sm); opacity: .9; }
+.pg-uheader__name { font-size: var(--pg-fs-xl); font-weight: 700; margin-top: 2px; }
+.pg-uheader__sub { font-size: var(--pg-fs-sm); opacity: .85; margin-top: 4px; }
+.pg-uheader__iconbtn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  display: grid; place-items: center; color: #fff;
+  position: relative;
+}
+.pg-uheader__iconbtn .pg-dot {
+  position: absolute; top: 8px; right: 9px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--pg-yellow); border: 2px solid var(--pg-blue-700);
+}
+.pg-uheader__logout { cursor: pointer; transition: background .12s ease; }
+.pg-uheader__logout:hover { background: rgba(255,90,90,.32); }
+.pg-uheader__logout svg { width: 18px; height: 18px; }
+.pg-uheader__textbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 34px; padding: 0 14px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16); color: #fff;
+  font-size: var(--pg-fs-sm); font-weight: 600; white-space: nowrap;
+  flex: none;
+}
+.pg-uheader__textbtn svg { width: 15px; height: 15px; }
+.pg-uheader__textbtn:active { background: rgba(255, 255, 255, .28); }
+
+/* ---------- Content wrapper ---------- */
+.pg-uscreen { padding: var(--pg-s-5); display: flex; flex-direction: column; gap: var(--pg-s-4); }
+.pg-uscreen--pull { margin-top: calc(var(--pg-s-6) * -1); }
+.pg-uscreen--pull-lg { margin-top: -70px; }
+
+/* ---------- Section title in screen ---------- */
+.pg-usection-title { font-size: var(--pg-fs-md); font-weight: 700; margin-top: var(--pg-s-2); }
+
+/* ---------- Segmented control (in-screen tabs) ---------- */
+.pg-seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--pg-surface-alt);
+  border: 1px solid var(--pg-border);
+  border-radius: 999px;
+}
+.pg-seg__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--pg-fs-sm);
+  color: var(--pg-text-secondary);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.pg-seg__btn svg { width: 15px; height: 15px; }
+.pg-seg__btn.is-active {
+  background: var(--pg-blue);
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .14);
+}
+
+/* ---------- Quick access grid ---------- */
+.pg-quick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pg-s-3);
+}
+.pg-quick__item {
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  border-radius: var(--pg-r-md);
+  padding: var(--pg-s-4) var(--pg-s-2);
+  display: flex; flex-direction: column; align-items: center; gap: var(--pg-s-2);
+  text-align: center;
+  font-size: var(--pg-fs-xs);
+  font-weight: 600;
+  color: var(--pg-text);
+}
+.pg-quick__ic {
+  position: relative;
+  width: 40px; height: 40px; border-radius: var(--pg-r-md);
+  background: var(--pg-blue-050); color: var(--pg-blue);
+  display: grid; place-items: center;
+}
+.pg-quick__ic svg { width: 20px; height: 20px; }
+
+/* count badge (jumlah todo belum selesai) — kartu Akses Cepat "Todo List" */
+.pg-countbadge {
+  position: absolute;
+  top: -7px; right: -9px;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--pg-danger);
+  color: #fff;
+  font-size: 10.5px; font-weight: 700;
+  line-height: 18px; text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--pg-surface);
+  pointer-events: none;
+}
+
+/* ---------- Mini stat pair ---------- */
+.pg-ministat {
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  border-radius: var(--pg-r-md);
+  padding: var(--pg-s-4);
+}
+.pg-ministat__label { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); display:flex; align-items:center; gap:6px; }
+.pg-ministat__value { font-size: var(--pg-fs-xl); font-weight: 700; margin-top: 4px; }
+.pg-ministat__cap { font-size: var(--pg-fs-xs); color: var(--pg-text-muted); }
+.pg-ministat__link { font-size: var(--pg-fs-xs); font-weight: 600; color: var(--pg-blue); margin-top: var(--pg-s-2); display:inline-flex; align-items:center; gap:4px; }
+
+/* ---------- Realtime clock card ---------- */
+.pg-clock__row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--pg-s-4);
+}
+.pg-clock__info { flex: 1; min-width: 0; }
+.pg-clock__head { display: flex; align-items: center; gap: 12px; }
+.pg-clock__ic {
+  width: 36px; height: 36px; border-radius: 10px; flex: none;
+  background: var(--pg-blue-050); color: var(--pg-blue);
+  display: grid; place-items: center;
+}
+.pg-clock__ic svg { width: 19px; height: 19px; }
+.pg-clock__time {
+  font-size: 25px; font-weight: 700; line-height: 1;
+  font-variant-numeric: tabular-nums; letter-spacing: .5px;
+}
+.pg-clock__date { font-size: var(--pg-fs-sm); color: var(--pg-text-secondary); margin-top: 8px; }
+.pg-clock__photo {
+  position: relative;
+  width: 72px; height: 72px; flex: none; border-radius: var(--pg-r-md); overflow: hidden;
+  background: var(--pg-blue-050); color: var(--pg-blue);
+  display: grid; place-items: center;
+  padding: 0; border: 0; cursor: pointer; -webkit-appearance: none; appearance: none;
+}
+.pg-clock__photo svg { width: 28px; height: 28px; opacity: .5; }
+.pg-clock__photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  background: var(--pg-blue-050);
+}
+/* prayer pill (shared .pg-prayer in components.css) sits full-width below the row */
+.pg-clock .pg-prayer { margin-top: 14px; }
+
+/* ---------- Status absensi card ---------- */
+.pg-attn-card { text-align: center; }
+.pg-attn-card__ic {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--pg-blue-050); color: var(--pg-blue);
+  display: grid; place-items: center; margin: 0 auto var(--pg-s-3);
+}
+.pg-attn-card__state { font-weight: 700; color: var(--pg-warning); font-size: var(--pg-fs-md); }
+.pg-attn-card__hint { font-size: var(--pg-fs-sm); color: var(--pg-text-secondary); margin-top: 4px; }
+
+/* ---------- Work hours strip ---------- */
+.pg-workhours {
+  display: flex;
+  align-items: center;
+  background: var(--pg-surface-alt);
+  border-radius: var(--pg-r-md);
+  padding: var(--pg-s-4);
+  gap: var(--pg-s-4);
+}
+.pg-workhours__ic { color: var(--pg-blue); flex: none; }
+.pg-workhours__col { flex: 1; text-align: center; }
+.pg-workhours__col + .pg-workhours__col { border-left: 1px solid var(--pg-border); }
+.pg-workhours__t { font-size: var(--pg-fs-lg); font-weight: 700; }
+.pg-workhours__l { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); }
+.pg-workhours__note { flex-basis: 100%; text-align: center; font-size: var(--pg-fs-xs); color: var(--pg-text-muted); }
+
+/* ---------- Todo list item (mobile) — compact ---------- */
+.pg-todo-item {
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  border-left: 3px solid var(--pg-border);
+  border-radius: var(--pg-r-sm);
+  padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 7px;
+  width: 100%;
+}
+.pg-todo-item--high { border-left-color: var(--pg-prio-high); }
+.pg-todo-item--mid  { border-left-color: var(--pg-prio-mid); }
+.pg-todo-item--low  { border-left-color: var(--pg-prio-low); }
+.pg-todo-item__head { display: flex; align-items: center; gap: 7px; }
+.pg-todo-item__title {
+  font-weight: 600; font-size: 13.5px;
+  display: flex; gap: 7px; align-items: center;
+  flex: 1; min-width: 0;
+}
+.pg-todo-item__title > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pg-todo-item__title > svg { width: 15px; height: 15px; flex: none; color: var(--pg-text-secondary); }
+.pg-todo-item__head > svg { width: 16px; height: 16px; flex: none; color: var(--pg-text-muted); }
+.pg-todo-item__note {
+  font-size: 11.5px; color: var(--pg-text-muted);
+  display: flex; gap: 5px; align-items: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pg-todo-item__note svg { width: 12px; height: 12px; flex: none; }
+.pg-todo-item__note span { overflow: hidden; text-overflow: ellipsis; }
+.pg-todo-item__foot {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 11.5px; color: var(--pg-text-muted);
+}
+.pg-todo-item__foot .pg-badge { font-size: 10px; padding: 1px 7px; }
+.pg-todo-item__foot span { font-variant-numeric: tabular-nums; }
+/* legacy meta classes kept for any other caller */
+.pg-todo-item__meta { display: flex; gap: var(--pg-s-6); }
+.pg-todo-item__meta-l { font-size: var(--pg-fs-xs); color: var(--pg-text-muted); }
+.pg-todo-item__meta-v { font-size: var(--pg-fs-sm); font-weight: 600; display:flex; align-items:center; gap:6px; }
+
+/* ---------- Riwayat row ---------- */
+.pg-history-row {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  padding: var(--pg-s-3) 0;
+  border-top: 1px solid var(--pg-border);
+}
+.pg-history-row:first-child { border-top: 0; }
+.pg-history-row__ic { width: 36px; height: 36px; border-radius: var(--pg-r-sm); background: var(--pg-surface-alt); display:grid; place-items:center; color: var(--pg-text-secondary); flex:none; }
+.pg-history-row__main { flex: 1; }
+.pg-history-row__d { font-size: var(--pg-fs-sm); font-weight: 600; }
+.pg-history-row__t { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); }
+
+/* .pg-resi-row / .pg-supplier-group moved to components.css (shared) — Admin
+   Panel's Laporan Resi Gudang now reuses the same drill-down rows/groups. */
+
+/* ---------- Laporan Resi (cross-staff resi gudang list) ---------- */
+.pg-lapresi-list { display: flex; flex-direction: column; }
+.pg-lapresi-row {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  width: 100%; text-align: left;
+  padding: var(--pg-s-3) 0;
+  background: none; border: 0; border-top: 1px solid var(--pg-border);
+  cursor: pointer; font: inherit; color: inherit;
+}
+.pg-lapresi-row:first-child { border-top: 0; }
+.pg-lapresi-row:active { background: var(--pg-surface-alt); }
+.pg-lapresi-row__main { flex: 1; min-width: 0; }
+.pg-lapresi-row__t {
+  font-size: var(--pg-fs-base); font-weight: 600; line-height: 1.35;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pg-lapresi-row__m {
+  font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); margin-top: 1px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pg-lapresi-row__right {
+  flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  font-size: var(--pg-fs-sm);
+}
+
+/* ---------- KPI summary rows ---------- */
+.pg-kpi-row { display: flex; flex-direction: column; gap: 6px; padding: var(--pg-s-3) 0; border-top: 1px solid var(--pg-border); }
+.pg-kpi-row:first-child { border-top: 0; }
+.pg-kpi-row__top { display: flex; justify-content: space-between; font-size: var(--pg-fs-sm); }
+.pg-kpi-row__pct { font-weight: 700; }
+
+/* ---------- Bottom navigation ---------- */
+.pg-bottomnav {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: var(--pg-user-bottomnav-h);
+  background: var(--pg-surface);
+  border-top: 1px solid var(--pg-border);
+  display: flex;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 20;
+}
+.pg-bottomnav__item {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pg-text-muted);
+  position: relative;
+}
+.pg-bottomnav__item svg { width: 22px; height: 22px; }
+.pg-bottomnav__item.is-active { color: var(--pg-blue); }
+.pg-bottomnav__item.is-active::before {
+  content: "";
+  position: absolute; top: 8px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--pg-yellow);
+  right: calc(50% - 18px);
+}
+
+/* count badge (e.g. Todo List = jumlah todo belum selesai) */
+.pg-bottomnav__icon { position: relative; display: inline-flex; }
+.pg-bottomnav__badge {
+  position: absolute;
+  top: -6px; left: 100%;
+  transform: translateX(-58%);
+  min-width: 16px; height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--pg-danger);
+  color: #fff;
+  font-size: 10px; font-weight: 700;
+  line-height: 16px; text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--pg-surface);
+  pointer-events: none;
+}
+/* when a count is shown, drop the redundant active dot on that item */
+.pg-bottomnav__item.is-active:has(.pg-bottomnav__badge:not([hidden]))::before { display: none; }
+
+/* ---------- raised centre button (Absensi) ---------- */
+.pg-bottomnav__item--center {
+  justify-content: flex-end;
+  padding-bottom: 6px;
+}
+.pg-bottomnav__item--center .pg-bottomnav__icon {
+  width: 54px; height: 54px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--pg-blue) 0%, var(--pg-blue-700) 100%);
+  color: #fff;
+  border: 4px solid var(--pg-surface);
+  box-shadow: 0 8px 18px -5px rgba(21,102,128,.55), 0 2px 4px rgba(0,0,0,.15);
+  transform: translateY(-20px);
+  transition: transform .12s ease, filter .12s ease;
+}
+.pg-bottomnav__item--center .pg-bottomnav__icon svg { width: 24px; height: 24px; }
+.pg-bottomnav__item--center > span:last-child { margin-top: -16px; }
+.pg-bottomnav__item--center:active .pg-bottomnav__icon { transform: translateY(-20px) scale(.94); }
+.pg-bottomnav__item--center.is-active { color: var(--pg-blue); }
+.pg-bottomnav__item--center.is-active .pg-bottomnav__icon { filter: brightness(1.08); }
+.pg-bottomnav__item--center.is-active::before { display: none; }   /* no yellow dot on the raised button */
+
+/* ---------- FAB (Buat Todo) — floats clear above the bottom nav ---------- */
+.pg-fab {
+  position: fixed;
+  right: 50%;
+  transform: translateX(calc(var(--pg-user-max-w) / 2 - 50% - 14px));
+  bottom: calc(var(--pg-user-bottomnav-h) + env(safe-area-inset-bottom) + 14px);
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--pg-yellow);
+  color: #4A3B00;
+  display: grid; place-items: center;
+  box-shadow: var(--pg-shadow-lg);
+  z-index: 30;
+}
+.pg-fab svg { width: 24px; height: 24px; }
+.pg-fab:active { filter: brightness(.95); }
+@media (max-width: 480px) {
+  .pg-fab { right: calc(var(--pg-s-5) + 2px); transform: none; }
+}
+
+/* ---------- Login ---------- */
+.pg-ulogin {
+  flex: 1;
+  min-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--pg-s-6);
+  gap: var(--pg-s-6);
+  background: linear-gradient(160deg, var(--pg-blue) 0%, var(--pg-blue-700) 60%, #0F3A48 100%);
+  color: #fff;
+}
+.pg-ulogin__brand { text-align: center; }
+.pg-ulogin__logo {
+  width: 64px; height: 64px; border-radius: var(--pg-r-lg);
+  background: rgba(255,255,255,.12); display:grid; place-items:center;
+  margin: 0 auto var(--pg-s-4);
+}
+.pg-ulogin__logo svg { width: 34px; height: 34px; }
+.pg-ulogin__name { font-size: var(--pg-fs-xl); font-weight: 800; letter-spacing: .12em; }
+.pg-ulogin__tag { font-size: var(--pg-fs-xs); letter-spacing: .22em; opacity: .8; }
+.pg-ulogin__card {
+  background: var(--pg-surface);
+  color: var(--pg-text);
+  border-radius: var(--pg-r-lg);
+  padding: var(--pg-s-6);
+  display: flex; flex-direction: column; gap: var(--pg-s-4);
+  box-shadow: var(--pg-shadow-lg);
+}
+.pg-ulogin__error { color: var(--pg-danger); font-size: var(--pg-fs-sm); }
+.pg-ulogin__foot { text-align: center; font-size: var(--pg-fs-xs); opacity: .8; }
+.pg-ulogin__foot a { color: var(--pg-yellow); }
+
+/* ---------- Jadwal Piket ---------- */
+.pg-piket-note {
+  display: flex; align-items: flex-start; gap: var(--pg-s-2);
+  font-size: var(--pg-fs-sm); color: var(--pg-text-secondary);
+  background: var(--pg-blue-050); border-radius: var(--pg-r-sm);
+  padding: var(--pg-s-3); line-height: 1.5;
+}
+.pg-piket-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--pg-blue); }
+.pg-piket-note--berkah { background: var(--pg-success-bg); }
+.pg-piket-note--berkah svg { color: var(--pg-success); }
+
+.pg-piket-list { display: flex; flex-direction: column; gap: var(--pg-s-2); }
+.pg-piket-day {
+  display: flex; gap: var(--pg-s-3); align-items: flex-start;
+  padding: var(--pg-s-3);
+  border: 1px solid var(--pg-border);
+  border-radius: var(--pg-r-md);
+  background: var(--pg-surface);
+}
+.pg-piket-day--today  { background: var(--pg-blue-050); border-color: var(--pg-blue-100); }
+.pg-piket-day--friday { background: var(--pg-success-bg); border-color: #C9E7DA; }
+
+.pg-piket-badge {
+  flex-shrink: 0;
+  width: 46px; height: 46px; border-radius: var(--pg-r-sm);
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 800; letter-spacing: .04em;
+  background: var(--pg-surface-alt); color: var(--pg-text-secondary);
+  border: 1px solid var(--pg-border);
+}
+.pg-piket-day--today  .pg-piket-badge { background: var(--pg-blue);    color: #fff; border-color: transparent; }
+.pg-piket-day--friday .pg-piket-badge { background: var(--pg-success); color: #fff; border-color: transparent; }
+
+.pg-piket-body { flex: 1; min-width: 0; }
+.pg-piket-dayhead {
+  display: flex; align-items: center; flex-wrap: wrap; gap: var(--pg-s-2);
+  font-weight: 700; font-size: var(--pg-fs-base); color: var(--pg-text);
+}
+.pg-piket-tag {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+  padding: 2px 8px; border-radius: var(--pg-r-pill); text-transform: uppercase;
+}
+.pg-piket-tag--today  { background: var(--pg-blue);    color: #fff; }
+.pg-piket-tag--berkah { background: var(--pg-success); color: #fff; }
+
+.pg-piket-people { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--pg-s-2); }
+.pg-piket-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px 3px 3px; border-radius: var(--pg-r-pill);
+  background: var(--pg-surface-alt); border: 1px solid var(--pg-border);
+  font-size: var(--pg-fs-sm); font-weight: 600; color: var(--pg-text);
+}
+.pg-piket-chip__ini {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 9.5px; font-weight: 800; color: #fff;
+  background: var(--pg-blue-600);
+}
+.pg-piket-chip--me { background: var(--pg-yellow-050); border-color: var(--pg-yellow-600); color: #4A3B00; }
+.pg-piket-chip--me .pg-piket-chip__ini { background: var(--pg-yellow-600); color: #4A3B00; }
+
+.pg-piket-empty { font-size: var(--pg-fs-sm); color: var(--pg-text-muted); margin-top: 4px; }
+
+/* ---------- Kerja Staf ---------- */
+.pg-kstaf-head { display: flex; align-items: center; gap: 10px; }
+.pg-kstaf-counts { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; max-width: 45%; }
+.pg-kstaf-counts .pg-badge { font-size: 10.5px; }
+.pg-kstaf-add {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; margin-top: 10px; padding: 9px 12px;
+  border: 1px dashed var(--pg-border-strong); border-radius: var(--pg-r-sm);
+  background: var(--pg-surface-alt); color: var(--pg-blue);
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.pg-kstaf-add:hover { border-color: var(--pg-blue); background: var(--pg-blue-050); }
+.pg-kstaf-add svg { width: 15px; height: 15px; flex: none; }

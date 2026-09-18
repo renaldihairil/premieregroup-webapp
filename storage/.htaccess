@@ -1,0 +1,6 @@
+# Nothing under storage/ is ever served over HTTP.
+# Uploaded selfies are delivered only through the authorized endpoint
+# /api/photo (see api/routes/photo.php). Sessions and caches live here too.
+Require all denied
+Deny from all
+Options -Indexes
