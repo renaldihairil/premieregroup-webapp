@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Clean URLs (/admin/dashboard, no #). If you deploy this app inside a
+       sub-folder, change href to "/that-folder/". -->
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#218DAE" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Premiere Group — Admin Panel</title>
+
+  <!-- PWA: installable app -->
+  <link rel="manifest" href="admin.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Premiere Admin" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <link rel="stylesheet" href="assets/css/tokens.css?v=143" />
+  <link rel="stylesheet" href="assets/css/base.css?v=143" />
+  <link rel="stylesheet" href="assets/css/components.css?v=143" />
+  <link rel="stylesheet" href="assets/css/admin.css?v=143" />
+</head>
+<body>
+  <div id="pg-admin-root"></div>
+
+  <!-- Core -->
+  <script src="assets/js/core/icons.js?v=143"></script>
+  <script src="assets/js/core/store.js?v=143"></script>
+  <script src="assets/js/core/auth.js?v=143"></script>
+  <script src="assets/js/core/ui.js?v=143"></script>
+  <script src="assets/js/core/camera.js?v=143"></script>
+  <script src="assets/js/core/cropper.js?v=143"></script>
+  <script src="assets/js/core/imgresize.js?v=143"></script>
+  <script src="assets/js/core/router.js?v=143"></script>
+  <script src="assets/js/core/pwa.js?v=143"></script>
+  <script src="assets/js/core/chat.js?v=143"></script>
+
+  <!-- Admin Panel -->
+  <script src="assets/js/admin/pages.js?v=143"></script>
+  <script src="assets/js/admin/app.js?v=143"></script>
+</body>
+</html>

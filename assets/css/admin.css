@@ -1,0 +1,340 @@
+/* ============================================================
+   PREMIERE GROUP — Admin Panel layout (responsive)
+   Desktop: fixed sidebar. Tablet/Mobile: drawer + hamburger.
+   ============================================================ */
+
+.pg-admin {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ---------- Sidebar ---------- */
+.pg-sidebar {
+  width: var(--pg-admin-sidebar-w);
+  flex: none;
+  background: var(--pg-blue);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: var(--pg-z-drawer);
+  transition: transform .22s ease;
+}
+.pg-sidebar__brand {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  padding: var(--pg-s-5);
+  font-weight: 800; letter-spacing: .1em;
+}
+.pg-sidebar__brand small { display: block; font-weight: 500; font-size: 10px; letter-spacing: .2em; opacity: .8; }
+.pg-sidebar__logo {
+  width: 34px; height: 34px; border-radius: var(--pg-r-sm);
+  background: rgba(255,255,255,.14); display: grid; place-items: center; flex: none;
+}
+.pg-sidebar__nav { flex: 1; overflow-y: auto; padding: var(--pg-s-2) var(--pg-s-3) var(--pg-s-6); }
+.pg-navgroup { margin-top: var(--pg-s-5); }
+.pg-navgroup__label {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  color: rgba(255,255,255,.55);
+  padding: 0 var(--pg-s-3) var(--pg-s-2);
+}
+.pg-navlink {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  padding: 10px var(--pg-s-3);
+  border-radius: var(--pg-r-sm);
+  color: rgba(255,255,255,.86);
+  font-size: var(--pg-fs-base);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.pg-navlink svg { width: 18px; height: 18px; flex: none; opacity: .9; }
+.pg-navlink:hover { background: rgba(255,255,255,.10); text-decoration: none; color: #fff; }
+.pg-navlink.is-active { background: var(--pg-yellow); color: #4A3B00; font-weight: 700; }
+.pg-navlink.is-active svg { opacity: 1; }
+.pg-navlink__badge {
+  margin-left: auto; flex: none;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px;
+  background: var(--pg-danger); color: #fff;
+  font-size: 10.5px; font-weight: 700; line-height: 18px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.pg-navlink.is-active .pg-navlink__badge { background: #4A3B00; color: var(--pg-yellow); }
+
+/* ---------- Sidebar collapse toggle (rail) ---------- */
+.pg-sidebar__collapse {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  margin: var(--pg-s-2) var(--pg-s-3) var(--pg-s-5);
+  padding: 10px var(--pg-s-3);
+  border-radius: var(--pg-r-sm);
+  color: rgba(255,255,255,.7);
+  font-size: var(--pg-fs-sm); font-weight: 600;
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: var(--pg-s-4); margin-top: var(--pg-s-2);
+}
+.pg-sidebar__collapse:hover { background: rgba(255,255,255,.10); color: #fff; }
+.pg-sidebar__collapse svg { width: 18px; height: 18px; flex: none; transition: transform .2s ease; }
+
+/* One custom property drives BOTH the sidebar box and the main offset, so the
+   collapse toggle is a single value flip (robust across engines). */
+.pg-admin { --pg-sb-w: var(--pg-admin-sidebar-w); }
+.pg-admin.is-rail { --pg-sb-w: var(--pg-admin-rail-w); }
+.pg-sidebar {
+  width: var(--pg-sb-w); min-width: var(--pg-sb-w); max-width: var(--pg-sb-w);
+  overflow: hidden;
+  transition: min-width .18s ease, max-width .18s ease, transform .22s ease;
+}
+.pg-adminmain { transition: margin-left .18s ease; }
+
+/* rail = icon-only; desktop only (mobile keeps the full-width drawer) */
+@media (min-width: 1025px) {
+  .pg-admin.is-rail .pg-sidebar__brand { justify-content: center; padding-left: 0; padding-right: 0; }
+  .pg-admin.is-rail .pg-sidebar__brand > *:not(.pg-sidebar__logo) { display: none; }
+  .pg-admin.is-rail .pg-navgroup__label { display: none; }
+  .pg-admin.is-rail .pg-navgroup { margin-top: var(--pg-s-3); }
+  .pg-admin.is-rail .pg-navlink { justify-content: center; padding-left: 0; padding-right: 0; gap: 0; position: relative; }
+  .pg-admin.is-rail .pg-navlink span { display: none; }
+  /* keep the Momen count visible in the collapsed rail as a corner dot */
+  .pg-admin.is-rail .pg-navlink .pg-navlink__badge:not([hidden]) {
+    display: block; position: absolute; top: 4px; right: 8px;
+    min-width: 0; width: 8px; height: 8px; padding: 0; font-size: 0; line-height: 0;
+  }
+  .pg-admin.is-rail .pg-sidebar__collapse { justify-content: center; padding-left: 0; padding-right: 0; gap: 0; }
+  .pg-admin.is-rail .pg-sidebar__collapse span { display: none; }
+  .pg-admin.is-rail .pg-sidebar__collapse svg { transform: rotate(180deg); }
+}
+@media (max-width: 1024px) {
+  .pg-admin, .pg-admin.is-rail { --pg-sb-w: var(--pg-admin-sidebar-w); }
+  .pg-sidebar__collapse { display: none; }
+}
+
+/* ---------- Main column ---------- */
+.pg-adminmain {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--pg-sb-w);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Topbar ---------- */
+.pg-topbar {
+  height: var(--pg-admin-topbar-h);
+  background: var(--pg-surface);
+  border-bottom: 1px solid var(--pg-border);
+  display: flex; align-items: center; gap: var(--pg-s-4);
+  padding: 0 var(--pg-s-6);
+  position: sticky; top: 0; z-index: 15;
+}
+.pg-topbar__hamburger {
+  width: 40px; height: 40px; border-radius: var(--pg-r-sm);
+  display: none; place-items: center; color: var(--pg-text);
+}
+.pg-topbar__hamburger:hover { background: var(--pg-surface-alt); }
+.pg-topbar__spacer { flex: 1; }
+.pg-topbar__iconbtn {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--pg-text-secondary);
+  position: relative;
+}
+.pg-topbar__iconbtn:hover { background: var(--pg-surface-alt); }
+.pg-topbar__iconbtn .pg-dot {
+  position: absolute; top: 9px; right: 10px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--pg-danger); border: 2px solid var(--pg-surface);
+}
+.pg-topbar__user { display: flex; align-items: center; gap: var(--pg-s-3); }
+.pg-topbar__user-meta { line-height: 1.2; }
+.pg-topbar__user-name { font-size: var(--pg-fs-sm); font-weight: 600; }
+.pg-topbar__user-role { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); }
+
+/* ---------- Page body ---------- */
+.pg-page {
+  padding: var(--pg-s-6);
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+}
+.pg-page__head { margin-bottom: var(--pg-s-6); }
+.pg-page__title { font-size: var(--pg-fs-xl); font-weight: 700; }
+.pg-page__crumb { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); margin-bottom: 4px; letter-spacing: .04em; text-transform: uppercase; }
+
+/* ---------- Dashboard realtime clock + prayer reminder (page-head, right side) ---------- */
+.pg-dashclock { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.pg-dashclock__row { display: flex; align-items: center; gap: 8px; color: var(--pg-text); }
+.pg-dashclock__row svg { width: 17px; height: 17px; color: var(--pg-blue); flex: none; }
+.pg-dashclock__time { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .5px; line-height: 1; }
+.pg-dashclock__date { font-size: var(--pg-fs-sm); color: var(--pg-text-secondary); }
+@media (max-width: 640px) {
+  .pg-dashclock { align-items: flex-start; margin-top: var(--pg-s-3); }
+}
+
+/* ---------- Drawer scrim ---------- */
+.pg-scrim {
+  position: fixed; inset: 0;
+  background: rgba(15, 27, 33, .45);
+  z-index: 30;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+/* ---------- Responsive: tablet & mobile ---------- */
+@media (max-width: 1024px) {
+  .pg-sidebar { transform: translateX(-100%); box-shadow: var(--pg-shadow-lg); }
+  .pg-admin.is-drawer-open .pg-sidebar { transform: translateX(0); }
+  .pg-admin.is-drawer-open .pg-scrim { opacity: 1; pointer-events: auto; }
+  .pg-adminmain { margin-left: 0; }
+  .pg-topbar__hamburger { display: grid; }
+}
+
+@media (max-width: 640px) {
+  .pg-topbar { padding: 0 var(--pg-s-4); }
+  .pg-topbar__user-meta { display: none; }
+  .pg-page { padding: var(--pg-s-4); }
+}
+
+/* ---------- Admin login ---------- */
+.pg-alogin {
+  flex: 1;
+  width: 100%;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--pg-s-6);
+  background: linear-gradient(160deg, var(--pg-blue) 0%, var(--pg-blue-700) 55%, #0E3543 100%);
+}
+.pg-alogin__card {
+  background: var(--pg-surface);
+  border-radius: var(--pg-r-lg);
+  box-shadow: var(--pg-shadow-lg);
+  width: 100%; max-width: 400px;
+  padding: var(--pg-s-8);
+  display: flex; flex-direction: column; gap: var(--pg-s-5);
+  text-align: center;
+}
+.pg-alogin__logo {
+  width: 60px; height: 60px; border-radius: var(--pg-r-md);
+  background: var(--pg-blue-050); color: var(--pg-blue);
+  display: grid; place-items: center; margin: 0 auto;
+}
+.pg-alogin__name { font-size: var(--pg-fs-xl); font-weight: 800; letter-spacing: .1em; }
+.pg-alogin__tag { font-size: var(--pg-fs-xs); letter-spacing: .2em; color: var(--pg-text-secondary); margin-top: 2px; }
+.pg-alogin__error { color: var(--pg-danger); font-size: var(--pg-fs-sm); }
+.pg-alogin__hint { font-size: var(--pg-fs-xs); color: var(--pg-text-muted); }
+
+/* ---------- Settings layout ---------- */
+.pg-settings-page { display: flex; flex-direction: column; gap: var(--pg-s-5); }
+.pg-settings-layout {
+  display: grid;
+  grid-template-columns: 224px 1fr;
+  gap: var(--pg-s-5);
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .pg-settings-layout { grid-template-columns: 1fr; }
+}
+.pg-settings-navcard {
+  padding: var(--pg-s-2);
+  position: sticky;
+  top: calc(var(--pg-admin-topbar-h) + var(--pg-s-4));
+}
+@media (max-width: 820px) {
+  .pg-settings-navcard { position: static; }
+}
+.pg-settings-nav { display: flex; flex-direction: column; gap: 2px; }
+@media (max-width: 820px) {
+  .pg-settings-nav { flex-direction: row; flex-wrap: wrap; }
+}
+.pg-settings-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--pg-s-2);
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: var(--pg-r-sm);
+  font-size: var(--pg-fs-base);
+  font-weight: 500;
+  color: var(--pg-text-secondary);
+  transition: background .12s ease, color .12s ease;
+}
+.pg-settings-nav__item svg { width: 18px; height: 18px; flex: none; }
+.pg-settings-nav__item.is-active { background: var(--pg-blue-050); color: var(--pg-blue); font-weight: 600; }
+.pg-settings-nav__item:hover:not(.is-active) { background: var(--pg-surface-alt); color: var(--pg-text); }
+
+/* ---------- Preview slider (Manajemen Absensi) ---------- */
+.pg-hours-preview {
+  display: flex; align-items: center; gap: var(--pg-s-3);
+  padding: var(--pg-s-5) var(--pg-s-4);
+}
+.pg-hours-preview__track {
+  flex: 1; height: 4px; border-radius: var(--pg-r-pill);
+  background: var(--pg-border);
+  position: relative;
+}
+.pg-hours-preview__track::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--pg-blue); border-radius: inherit;
+}
+.pg-hours-preview__dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--pg-blue); border: 3px solid #fff;
+  box-shadow: var(--pg-shadow-sm);
+  flex: none;
+}
+.pg-hours-preview__cap { font-size: var(--pg-fs-sm); font-weight: 700; }
+.pg-hours-preview__sub { font-size: var(--pg-fs-xs); color: var(--pg-text-secondary); }
+
+/* ============================================================
+   PRINT — KPI report (A4).  A hidden #pg-print-root is filled by
+   printReport() then window.print(); everything else is hidden.
+   ============================================================ */
+#pg-print-root { display: none; }
+
+@media print {
+  @page { size: A4 portrait; margin: 16mm 14mm; }
+
+  html, body { background: #fff !important; }
+  /* hide the whole app shell + any open modal */
+  body > *:not(#pg-print-root) { display: none !important; }
+
+  #pg-print-root {
+    display: block !important;
+    position: static;
+    font-family: var(--pg-font, system-ui, sans-serif);
+    color: #111;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .pg-print__head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 2px solid #111; padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .pg-print__brand { font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+  .pg-print__brand small { display: block; font-size: 10px; font-weight: 600; letter-spacing: .18em; color: #555; }
+  .pg-print__title { text-align: right; }
+  .pg-print__title b { font-size: 14px; }
+  .pg-print__title span { display: block; font-size: 10.5px; color: #555; }
+
+  .pg-print__meta {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: #ccc; border: 1px solid #ccc; margin-bottom: 16px;
+  }
+  .pg-print__meta div { background: #fff; padding: 7px 9px; }
+  .pg-print__meta .k { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #666; }
+  .pg-print__meta .v { font-size: 12.5px; font-weight: 700; margin-top: 2px; }
+  .pg-print__meta .v--big { font-size: 18px; }
+
+  .pg-print table { width: 100%; border-collapse: collapse; }
+  .pg-print th, .pg-print td { border: 1px solid #bbb; padding: 6px 8px; text-align: left; vertical-align: top; }
+  .pg-print th { background: #f0f0f0; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+  .pg-print td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pg-print tr.is-sub td:first-child { padding-left: 22px; color: #444; }
+  .pg-print tr.is-total td { font-weight: 800; background: #f7f7f7; font-size: 13px; }
+
+  .pg-print__note { margin-top: 14px; border: 1px solid #bbb; padding: 9px 11px; }
+  .pg-print__note b { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: #666; margin-bottom: 3px; }
+
+  .pg-print__foot { margin-top: 26px; font-size: 10px; color: #666; display: flex; justify-content: space-between; }
+
+  tr, td, th { page-break-inside: avoid; }
+}
